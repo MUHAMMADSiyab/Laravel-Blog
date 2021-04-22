@@ -130,6 +130,6 @@ class PostController extends Controller
             $user->updateRatingFor($post, $request->rating);
         }
 
-        return response()->json(['success' => 'Post rated successfullt']);
+        return response()->json($post->avg_rating);
     }
 }

@@ -4,7 +4,19 @@
 
     <div class="row">
       <div class="col-md-4" v-for="post in blogPosts" :key="post.id">
-        <div class="card mb-4" style="max-height: 470px; min-height: 470px">
+        <div
+          class="card mb-4 position-relative"
+          style="max-height: 530px; min-height: 530px"
+        >
+          <!-- Average rating -->
+          <div class="avg-rating">
+            <star-rating
+              :rating="post.avg_rating"
+              :star-size="15"
+              :read-only="true"
+            ></star-rating>
+          </div>
+
           <div class="card-header">
             <h4 class="card-title">{{ post.title }}</h4>
           </div>
@@ -49,6 +61,17 @@
                 Delete
               </button>
             </div>
+
+            <!-- Rating -->
+            <div v-if="authUser && authUser.id !== post.user_id">
+              <hr />
+              <star-rating
+                v-model="rating"
+                :star-size="20"
+                @rating-selected="setRating(post.id)"
+                :animate="true"
+              ></star-rating>
+            </div>
           </div>
         </div>
       </div>
@@ -58,12 +81,14 @@
 
 <script>
 import SuccessAlert from "../common/SuccessAlert";
+import StarRating from "vue-star-rating";
 
 export default {
   props: ["posts"],
 
   components: {
     SuccessAlert,
+    StarRating,
   },
 
   data() {
@@ -71,6 +96,7 @@ export default {
       blogPosts: this.posts,
       success: false,
       authUser: null,
+      rating: 0,
     };
   },
   methods: {
@@ -108,6 +134,22 @@ export default {
         }
       }
     },
+
+    async setRating(postId) {
+      try {
+        const res = await axios.post(`/api/posts/${postId}/rate`, {
+          rating: this.rating,
+        });
+
+        this.posts.forEach((post) => {
+          if (post.id === postId) {
+            post.avg_rating = res.data;
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 
   mounted() {
@@ -115,3 +157,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.avg-rating {
+  width: 37%;
+  padding: 3px;
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  background: #f7f7f7;
+  text-align: center;
+  top: -10px;
+  border-radius: 2px;
+  right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

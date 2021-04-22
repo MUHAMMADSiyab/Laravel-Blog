@@ -16,5 +16,14 @@
                 </p>
             </div>
         </div>
+
+        {{-- Comments --}}
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <h5>Comments</h5>
+                <hr>
+                <comments-view :comments="{{ json_encode($post->comments) }}" :post-id="{{ json_encode($post->id) }}" />
+            </div>
+        </div>
     </div>
 @endsection

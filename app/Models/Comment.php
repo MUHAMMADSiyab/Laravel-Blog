@@ -15,6 +15,11 @@ class Comment extends Model
         'body',
     ];
 
+    protected $appends = [
+        'formatted_date',
+    ];
+
+    protected $with = ['user'];
     /**
      * Checks whether the user trying to edit/delete the comment is the one who created it
      * @param App\Models\Post $post
@@ -39,5 +44,10 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getFormattedDateAttribute()
+    {
+        return  $this->created_at->format('M d, Y h:i:s A');
     }
 }

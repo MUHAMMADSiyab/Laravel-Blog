@@ -23,7 +23,10 @@ class Post extends Model implements Rateable
     protected $appends = [
         'summary',
         'formatted_date',
+        'avg_rating'
     ];
+
+    protected $with = ['comments'];
 
     /**
      * Checks whether the user trying to edit/delete the post is the one who created it
@@ -41,11 +44,6 @@ class Post extends Model implements Rateable
         }
     }
 
-    public function getAvgRating()
-    {
-        return $this->averageRating(User::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -59,6 +57,11 @@ class Post extends Model implements Rateable
     public function getSummaryAttribute()
     {
         return Str::words($this->description, 25, "...");
+    }
+
+    public function getAvgRatingAttribute()
+    {
+        return $this->averageRating(User::class);
     }
 
     public function getFormattedDateAttribute()

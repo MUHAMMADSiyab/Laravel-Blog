@@ -32,7 +32,7 @@ class CommentController extends Controller
         $data = $request->validated();
         $comment = auth()->user()->comments()->create($data);
 
-        return response()->json($comment, 201);
+        return response()->json($comment->load('user'), 201);
     }
 
 
@@ -67,7 +67,7 @@ class CommentController extends Controller
         $data = $request->validated();
         $updatedComment = tap($comment)->update($data);
 
-        return response()->json($updatedComment);
+        return response()->json($updatedComment->load('user'));
     }
 
     /**

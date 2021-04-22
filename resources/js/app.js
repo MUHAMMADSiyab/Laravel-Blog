@@ -34,11 +34,14 @@ import PostAddForm from "./components/posts/PostAddForm";
 import PostEditForm from "./components/posts/PostEditForm";
 import Posts from "./components/posts/Posts";
 
+import Comments from "./components/comments/Comments";
+
 const app = new Vue({
     el: "#app",
     components: {
         PostAddForm,
         PostEditForm,
-        "posts-view": Posts
+        "posts-view": Posts,
+        "comments-view": Comments
     }
 });
