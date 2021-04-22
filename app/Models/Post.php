@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Rennokki\Rating\Contracts\Rateable;
 use Rennokki\Rating\Traits\CanBeRated;
+use Illuminate\Support\Str;
+
 
 class Post extends Model implements Rateable
 {
@@ -16,6 +18,11 @@ class Post extends Model implements Rateable
         'video',
         'description',
         'user_id',
+    ];
+
+    protected $appends = [
+        'summary',
+        'formatted_date',
     ];
 
     /**
@@ -47,5 +54,15 @@ class Post extends Model implements Rateable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function getSummaryAttribute()
+    {
+        return Str::words($this->description, 25, "...");
+    }
+
+    public function getFormattedDateAttribute()
+    {
+        return  $this->created_at->format('M d, Y h:i:s A');
     }
 }

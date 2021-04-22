@@ -25,7 +25,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Post
     Route::post('posts/{post}/rate', [PostController::class, 'ratePost']);
-    Route::resource('posts', PostController::class);
+    Route::resource('posts', PostController::class)->except([
+        'create', 'edit'
+    ]);
 
     // Comment
     Route::resource('comments', CommentController::class)

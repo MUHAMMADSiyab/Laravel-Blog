@@ -21,15 +21,6 @@ class PostController extends Controller
         return response()->json($posts);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('posts.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -63,21 +54,6 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return response()->json($post);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  App\Models\Post $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        if (!Post::checkPosterIdentity($post)) {
-            abort(403);
-        }
-
-        return view('posts.edit', $post);
     }
 
     /**

@@ -15,7 +15,7 @@
                         @endif
 
 
-                        @php $rating = 3.4; @endphp
+                        {{-- @php $rating = 3.4; @endphp
 
                         @foreach (range(1, 5) as $i)
                             <span class="fa-stack" style="width:2em">
@@ -30,7 +30,7 @@
                                 @endif
                                 @php $rating--; @endphp
                             </span>
-                        @endforeach
+                        @endforeach --}}
 
                     </div>
                 </div>
