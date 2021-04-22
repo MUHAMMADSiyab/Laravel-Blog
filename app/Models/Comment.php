@@ -5,26 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'video',
-        'description',
+        'post_id',
         'user_id',
+        'body',
     ];
 
     /**
-     * Checks whether the user trying to edit/delete the post is the one who created it
+     * Checks whether the user trying to edit/delete the comment is the one who created it
      * @param App\Models\Post $post
      * @return bool
      */
-    public static function checkPosterIdentity(Post $post): bool
+    public static function checkPosterIdentity(Comment $comment): bool
     {
         if (!auth()->user()->is_admin) {
-            if ($post->user_id !== auth()->id()) {
+            if ($comment->user_id !== auth()->id()) {
                 return false;
             }
 
@@ -32,13 +31,13 @@ class Post extends Model
         }
     }
 
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
     }
 }

@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('comments');
         return response()->json($posts);
     }
 
@@ -73,6 +73,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if (!Post::checkPosterIdentity($post)) {
+            abort(403);
+        }
+
         return view('posts.edit', $post);
     }
 
@@ -85,6 +89,10 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        if (!Post::checkPosterIdentity($post)) {
+            return response()->json(['message' => "Unauthorized"], 403);
+        }
+
         $data = $request->validated();
 
         if ($request->hasFile('video')) {
@@ -114,6 +122,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (!Post::checkPosterIdentity($post)) {
+            return response()->json(['message' => "Unauthorized"], 403);
+        }
+
         if ($post->delete()) {
             // delete video too
             Storage::delete('public/posts/' . $post->video);
