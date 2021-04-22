@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43c1fdeee6a539dc877e247f3d9a62a3",
+    "content-hash": "090b3f10e60b8a33ae7e978eae7be299",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3259,6 +3259,79 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "rennokki/rating",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/renoki-co/rating.git",
+                "reference": "6975680d691629d04e4111dc4b3fb7bf5245fc54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/renoki-co/rating/zipball/6975680d691629d04e4111dc4b3fb7bf5245fc54",
+                "reference": "6975680d691629d04e4111dc4b3fb7bf5245fc54",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^7.30|^8.23",
+                "illuminate/support": "^7.30|^8.23"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.1",
+                "mockery/mockery": "^1.4",
+                "orchestra/database": "^5.0|^6.0",
+                "orchestra/testbench": "^5.0|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rennokki\\Rating\\RatingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rennokki\\Rating\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Renoki",
+                    "email": "alex@renoki.org",
+                    "homepage": "https://github.com/rennokki",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Eloquent Rating allows you to assign ratings to any model.",
+            "homepage": "https://github.com/renoki-co/rating",
+            "keywords": [
+                "Rate",
+                "Rating",
+                "eloquent",
+                "laravel",
+                "model",
+                "star",
+                "stars",
+                "system"
+            ],
+            "support": {
+                "issues": "https://github.com/renoki-co/rating/issues",
+                "source": "https://github.com/renoki-co/rating/tree/3.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://ko-fi.com/rennokki",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2021-04-17T18:35:24+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Rennokki\Rating\Contracts\Rater;
+use Rennokki\Rating\Traits\CanRate;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Rater
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CanRate;
 
     protected $appends = [
         'is_admin',

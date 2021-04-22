@@ -22,7 +22,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         return auth()->user();
     });
 
+
     // Post
+    Route::post('posts/{post}/rate', [PostController::class, 'ratePost']);
     Route::resource('posts', PostController::class);
 
     // Comment

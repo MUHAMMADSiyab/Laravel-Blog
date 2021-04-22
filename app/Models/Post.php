@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Rennokki\Rating\Contracts\Rateable;
+use Rennokki\Rating\Traits\CanBeRated;
 
-class Post extends Model
+class Post extends Model implements Rateable
 {
-    use HasFactory;
+    use HasFactory, CanBeRated;
 
     protected $fillable = [
         'title',
@@ -30,6 +32,11 @@ class Post extends Model
 
             return true;
         }
+    }
+
+    public function getAvgRating()
+    {
+        return $this->averageRating(User::class);
     }
 
     public function user()

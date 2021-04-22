@@ -133,4 +133,27 @@ class PostController extends Controller
             return response()->json(['success' => 'Post deleted successfully']);
         }
     }
+
+    /**
+     * Rate a post
+     * @param Request $request
+     * @param App\Models\Post $post
+     * @return \Illuminate\Http\Response $response
+     */
+    public function ratePost(Request $request, Post $post)
+    {
+        $user = auth()->user();
+
+        if (auth()->id() === $post->user_id) {
+            return response()->json(['message' => "Cannot rate your own post"], 403);
+        }
+
+        if (!$user->hasRated($post)) {
+            $user->rate($post, $request->rating);
+        } else {
+            $user->updateRatingFor($post, $request->rating);
+        }
+
+        return response()->json(['success' => 'Post rated successfullt']);
+    }
 }
