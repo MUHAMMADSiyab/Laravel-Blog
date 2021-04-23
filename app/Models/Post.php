@@ -42,6 +42,8 @@ class Post extends Model implements Rateable
 
             return true;
         }
+
+        return true;
     }
 
     public function user()

@@ -10,11 +10,7 @@
         >
           <!-- Average rating -->
           <div class="avg-rating">
-            <star-rating
-              :rating="post.avg_rating"
-              :star-size="15"
-              :read-only="true"
-            ></star-rating>
+            <avg-rating :rating="post.avg_rating" />
           </div>
 
           <div class="card-header">
@@ -82,6 +78,7 @@
 <script>
 import SuccessAlert from "../common/SuccessAlert";
 import StarRating from "vue-star-rating";
+import AvgRating from "./AvgRating";
 
 export default {
   props: ["posts"],
@@ -89,6 +86,7 @@ export default {
   components: {
     SuccessAlert,
     StarRating,
+    AvgRating,
   },
 
   data() {
@@ -158,20 +156,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.avg-rating {
-  width: 37%;
-  padding: 3px;
-  position: absolute;
-  height: 20px;
-  line-height: 20px;
-  background: #f7f7f7;
-  text-align: center;
-  top: -10px;
-  border-radius: 2px;
-  right: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

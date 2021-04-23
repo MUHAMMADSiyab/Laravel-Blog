@@ -33,6 +33,7 @@ Vue.component(
 import PostAddForm from "./components/posts/PostAddForm";
 import PostEditForm from "./components/posts/PostEditForm";
 import Posts from "./components/posts/Posts";
+import AvgRating from "./components/posts/AvgRating";
 
 import Comments from "./components/comments/Comments";
 
@@ -41,6 +42,7 @@ const app = new Vue({
     components: {
         PostAddForm,
         PostEditForm,
+        "avg-rating": AvgRating,
         "posts-view": Posts,
         "comments-view": Comments
     }

@@ -71,7 +71,7 @@
 import SuccessAlert from "../common/SuccessAlert";
 
 export default {
-  props: ["post"],
+  props: ["post", "admin"],
 
   components: {
     SuccessAlert,
@@ -119,7 +119,7 @@ export default {
 
         this.hideAlert();
 
-        window.location.href = `/posts`;
+        window.location.href = !this.admin ? `/posts` : `/admin/posts`;
       } catch (error) {
         if (error.response.status === 422) {
           this.errors = error.response.data.errors;

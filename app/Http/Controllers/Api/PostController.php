@@ -106,7 +106,11 @@ class PostController extends Controller
             // delete video too
             Storage::delete('public/posts/' . $post->video);
 
-            return response()->json(['success' => 'Post deleted successfully']);
+            if (request()->ajax()) {
+                return response()->json(['success' => 'Post deleted successfully']);
+            }
+
+            return back();
         }
     }
 

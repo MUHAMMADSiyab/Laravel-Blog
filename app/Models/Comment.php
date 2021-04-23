@@ -34,6 +34,8 @@ class Comment extends Model
 
             return true;
         }
+
+        return true;
     }
 
     public function post()

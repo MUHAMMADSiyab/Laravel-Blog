@@ -10,7 +10,7 @@
                     <div class="card-header">{{ __('Create a New Post') }}</div>
 
                     <div class="card-body">
-                        <post-edit-form :post="{{ json_encode($post) }}" />
+                        <post-edit-form :post="{{ json_encode($post) }}" :admin="{{ json_encode(false) }}" />
                     </div>
                 </div>
             </div>
